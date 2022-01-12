@@ -1,0 +1,11 @@
+service-name: solr
+# files are copied into .ddev; can be either files or directories
+files:
+- solr
+- docker-compose.solr-standalone.yaml
+# actions are shell actions to be taken after the files are copied
+# These actions are taken in the .ddev directory
+actions:
+- mv docker-compose.solr-standalong.yaml docker-compose.solr.yaml
+- ls -l solr
+- ls -l docker-compose.solr.yaml
