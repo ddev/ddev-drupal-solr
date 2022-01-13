@@ -6,6 +6,6 @@ files:
 # actions are shell actions to be taken after the files are copied
 # These actions are taken in the .ddev directory
 actions:
-- mv docker-compose.solr-standalong.yaml docker-compose.solr.yaml
+- mv docker-compose.solr-standalone.yaml docker-compose.solr.yaml
 - ls -l solr
 - ls -l docker-compose.solr.yaml
