@@ -1,0 +1,57 @@
+on:
+  pull_request:
+    paths:
+    - "go.*"
+    - "pkg/**"
+    - "cmd/**"
+    - "Makefile"
+    - "vendor/**"
+
+  push:
+    branches: [ master, main ]
+
+  schedule:
+  - cron: '01 00 * * *'
+    
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        description: 'Debug with tmate set "debug_enabled"'
+        required: false
+        default: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  tests:
+    defaults:
+      run:
+        shell: bash
+
+    strategy:
+      matrix:
+        ddev_version: [latest, HEAD]
+      fail-fast: false
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Environment setup
+      run: brew install bats-core
+
+    - name: Install ddev latest
+      if: matrix.ddev_version == 'latest'
+      run: brew install drud/ddev/ddev
+
+    - name: Install ddev HEAD
+      if: matrix.ddev_version == 'HEAD'
+      run: brew install --HEAD drud/ddev/ddev
+
+    - name: tests
+      run: |
+        ddev --version
+        echo "This is running"
+
