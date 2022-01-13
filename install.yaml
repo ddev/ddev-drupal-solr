@@ -7,5 +7,3 @@ files:
 # These actions are taken in the .ddev directory
 actions:
 - mv docker-compose.solr-standalone.yaml docker-compose.solr.yaml
-- ls -l solr
-- ls -l docker-compose.solr.yaml

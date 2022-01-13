@@ -67,13 +67,13 @@ Note: If you choose to run Solr Cloud using a single node in standalone mode,
       configset. There's a corresponding option in the UI and a parameter for
       the drush command.
 
-## Installation step by step
+## Post-installation steps
 
-1. Copy `docker-compose.solr.yaml` **or** `docker-compose.solr-standalone.yaml` to your project's `.ddev` directory.
-2. Copy the `solr` folder (`including security.json`) to your project's `.ddev` directory.
-3. Configure your application to connect Solr at `http://ddev-<project>-solr:8983`.
-4. If you want to use Solr's APIs that require a trusted context configure Basic Auth with username `solr` and password `SolrRocks`.
-5. (Re-)start your DDEV project.
+After `ddev service get solr` you can:
+
+1.`ddev restart`
+2. Configure your application to connect Solr at `http://ddev-<project>-solr:8983`.
+3. If you want to use Solr's APIs that require a trusted context configure Basic Auth with username `solr` and password `SolrRocks`.
 
 ## Solarium
 
@@ -93,7 +93,7 @@ $config = [
     'endpoint' => [
         'localhost' => [
             // Replace <project> by your project's name:
-            'host' => 'ddev-<project>-solr',
+            'host' => 'solr',
             'port' => 8983,
             'path' => '/',
             // Use your collection name here:
