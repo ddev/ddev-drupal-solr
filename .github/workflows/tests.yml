@@ -1,12 +1,5 @@
 on:
   pull_request:
-    paths:
-    - "go.*"
-    - "pkg/**"
-    - "cmd/**"
-    - "Makefile"
-    - "vendor/**"
-
   push:
     branches: [ master, main ]
 
