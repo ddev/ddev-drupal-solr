@@ -12,7 +12,7 @@ on:
 
   schedule:
   - cron: '01 00 * * *'
-    
+
   workflow_dispatch:
     inputs:
       debug_enabled:
@@ -49,6 +49,13 @@ jobs:
     - name: Install ddev HEAD
       if: matrix.ddev_version == 'HEAD'
       run: brew install --HEAD drud/ddev/ddev
+
+    - name: tmate debugging session
+      uses: mxschmitt/action-tmate@v3
+      with:
+        limit-access-to-actor: true
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+      if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
 
     - name: tests
       run: |
