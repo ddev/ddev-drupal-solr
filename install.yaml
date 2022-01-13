@@ -1,4 +1,4 @@
-service-name: solr
+name: solr
 # files are copied into .ddev; can be either files or directories
 files:
 - solr
