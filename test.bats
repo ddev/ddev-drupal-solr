@@ -10,6 +10,7 @@ setup() {
   ddev composer install -n
   ddev drush si -y --account-pass=admin
   ddev drush en -y search_api search_api_solr search_api_solr_defaults search_api_solr_admin
+  ddev drush config:import --source=${DIR}/testdata
 }
 
 #teardown() {
