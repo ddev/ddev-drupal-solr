@@ -1,18 +1,19 @@
 setup() {
   DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )"
-  TESTDIR=~/tmp/test
-  ddev delete -Oy test || true
+  TESTDIR=$(mktemp -d -t testsolr-XXXXXXXXXX)
+  PROJNAME=testsolr
+  ddev delete -Oy ${PROJNAME} || true
   export DDEV_NON_INTERACTIVE=true
-  mkdir -p ${TESTDIR} && cd "${TESTDIR}"
-  mkdir -p web/sites/default/files/sync
-  ddev config --project-type=drupal9 --docroot=web --create-docroot --mutagen-enabled
+  cd "${TESTDIR}"
+  ddev config --project-name=${PROJNAME} --project-type=drupal9 --docroot=web --create-docroot --mutagen-enabled
   ddev composer create -y -n --no-install drupal/recommended-project
+  mkdir -p web/sites/default/files/sync
   ddev composer require -n --no-install drush/drush:* drupal/search_api_solr
   ddev composer install -n
   ddev drush si -y --account-pass=admin
   ddev drush en -y search_api search_api_solr search_api_solr_defaults search_api_solr_admin
   cp -r ${DIR}/testdata/ ${TESTDIR}/web/sites/default/files/sync
-  ddev drush config:import
+  ddev drush config:import -y
 }
 
 #teardown() {
