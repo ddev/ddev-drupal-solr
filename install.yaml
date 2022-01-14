@@ -10,5 +10,5 @@ files:
 - docker-compose.solr.yaml
 
 post_install_actions:
-- ls
+- chmod +x solr/solr-configupdate.sh
 
