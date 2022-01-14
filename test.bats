@@ -7,9 +7,11 @@ setup() {
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME} --project-type=drupal9 --docroot=web --create-docroot --mutagen-enabled
   ddev composer create -y -n --no-install drupal/recommended-project
-  mkdir -p web/sites/default/files/sync
   ddev composer require -n --no-install drush/drush:* drupal/search_api_solr
   ddev composer install -n
+  # This restart shouldn't be required, will need to fix in ddev
+  mkdir -p web/sites/default/files/sync
+  ddev restart
   ddev drush si -y --account-pass=admin
   ddev drush en -y search_api search_api_solr search_api_solr_defaults search_api_solr_admin
   cp -r ${DIR}/testdata/ ${TESTDIR}/web/sites/default/files/sync
