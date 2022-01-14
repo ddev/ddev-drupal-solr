@@ -4,10 +4,10 @@ setup() {
   SITENAME=test.ddev.site
   export DDEV_NON_INTERACTIVE=true
   mkdir -p ${TESTDIR} && cd "${TESTDIR}"
-  ddev config --project-type=drupal9 --docroot=web --create-docroot
-  ddev composer create -y drupal/recommended-project
-  ddev composer require drush/drush:* drupal/search_api_solr
-  ddev composer install
+  ddev config --project-type=drupal9 --docroot=web --create-docroot --mutagen-enabled
+  ddev composer create -y -n --no-install drupal/recommended-project
+  ddev composer require -n --no-install drush/drush:* drupal/search_api_solr
+  ddev composer install -n
   ddev drush si -y minimal --account-pass=admin
   ddev drush en -y search_api_solr_admin
 }
