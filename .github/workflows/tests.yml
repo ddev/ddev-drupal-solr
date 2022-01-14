@@ -25,7 +25,8 @@ jobs:
 
     strategy:
       matrix:
-        ddev_version: [latest, HEAD]
+#        ddev_version: [latest, edge, HEAD, PR]
+        ddev_version: [PR]
       fail-fast: false
 
     runs-on: ubuntu-20.04
@@ -33,15 +34,28 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Environment setup
-      run: brew install bats-core
+      run: |
+        brew install bats-core
+        mkcert -install
 
-    - name: Install ddev latest
+    - name: Use ddev latest stable
       if: matrix.ddev_version == 'latest'
       run: brew install drud/ddev/ddev
 
-    - name: Install ddev HEAD
+    - name: Use ddev edge
+      if: matrix.ddev_version == 'edge'
+      run: brew install drud/ddev-edge/ddev
+
+    - name: Use ddev HEAD
       if: matrix.ddev_version == 'HEAD'
       run: brew install --HEAD drud/ddev/ddev
+
+    - name: Use ddev PR
+      if: matrix.ddev_version == 'PR'
+      run: |
+        curl -sSL -o ddev_linux.zip https://nightly.link/drud/ddev/actions/artifacts/141796751.zip
+        unzip ddev_linux.zip
+        mv ddev /usr/local/bin/ddev && chmod +x /usr/local/bin/ddev
 
     - name: tmate debugging session
       uses: mxschmitt/action-tmate@v3
