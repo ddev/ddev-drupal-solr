@@ -1,4 +1,5 @@
 setup() {
+  DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )"
   TESTDIR=~/tmp/test
   SITENAME=test.ddev.site
   export DDEV_NON_INTERACTIVE=true
@@ -18,7 +19,7 @@ teardown() {
 
 @test "basic installation" {
   pushd ${TESTDIR} >/dev/null
-  ddev service get solr
+  ddev service get ${DIR}
   ddev restart
   curl -I -H "Host: ${SITENAME}" http://${SITENAME}/#solr:8983
 }
