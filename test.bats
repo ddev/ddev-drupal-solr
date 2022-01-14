@@ -7,7 +7,7 @@ setup() {
   ddev composer create -y drupal/recommended-project
   ddev composer require drush/drush:* drupal/search_api_solr
   ddev composer install
-  ddev drush si -y standard --account-pass=admin
+  ddev drush si -y minimal --account-pass=admin
   ddev drush en -y search_api_solr_admin
 }
 

@@ -1,9 +1,14 @@
 name: solr
 # files are copied into .ddev; can be either files or directories
+pre_install_actions:
+- ["docker", "volume", "rm" "<project>_solr"]
+- ["rm", "-rf", "solr/solr-configupdate.sh"]
 files:
 - solr
-- docker-compose.solr-standalone.yaml
+- docker-compose.solr.yaml
+- solr/solr-configupdate.sh
+
 # actions are shell actions to be taken after the files are copied
 # These actions are taken in the .ddev directory
-actions:
-- mv docker-compose.solr-standalone.yaml docker-compose.solr.yaml
+#post_install_actions:
+
