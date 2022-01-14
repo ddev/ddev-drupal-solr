@@ -1,7 +1,7 @@
 setup() {
   TESTDIR=~/tmp/test
   SITENAME=test.ddev.site
-  DDEV_NON_INTERACTIVE=true
+  export DDEV_NON_INTERACTIVE=true
   mkdir -p ${TESTDIR} && cd "${TESTDIR}"
   ddev config --project-type=drupal9 --docroot=web --create-docroot
   ddev composer create -y drupal/recommended-project
