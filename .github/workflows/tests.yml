@@ -53,7 +53,7 @@ jobs:
     - name: Use ddev PR
       if: matrix.ddev_version == 'PR'
       run: |
-        curl -sSL -o ddev_linux.zip https://nightly.link/drud/ddev/actions/artifacts/141796751.zip
+        curl -sSL -o ddev_linux.zip https://nightly.link/drud/ddev/actions/artifacts/143143317.zip
         unzip ddev_linux.zip
         mv ddev /usr/local/bin/ddev && chmod +x /usr/local/bin/ddev
 
