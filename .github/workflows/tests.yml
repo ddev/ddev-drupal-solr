@@ -66,6 +66,5 @@ jobs:
 
     - name: tests
       run: |
-        ddev --version
-        echo "This is running"
+        bats *.bats
 
