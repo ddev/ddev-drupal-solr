@@ -66,5 +66,5 @@ jobs:
 
     - name: tests
       run: |
-        bats *.bats
+        bats tests
 
