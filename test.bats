@@ -12,16 +12,13 @@ setup() {
   # This restart shouldn't be required, will need to fix in ddev
   mkdir -p web/sites/default/files/sync
   ddev restart
-  ddev drush si -y --account-pass=admin
-  ddev drush en -y search_api search_api_solr search_api_solr_defaults search_api_solr_admin
-  cp -r ${DIR}/testdata/ ${TESTDIR}/web/sites/default/files/sync
-  ddev drush config:import -y
+  ddev import-db --src=${DIR}/testdata/db.sql.gz
 }
 
-#teardown() {
-#    ddev delete -Oy ${DDEV_SITENAME}
-#    rm -rf ${TESTDIR}
-#}
+teardown() {
+    ddev delete -Oy ${DDEV_SITENAME}
+    rm -rf ${TESTDIR}
+}
 
 @test "basic installation" {
   pushd ${TESTDIR} >/dev/null
