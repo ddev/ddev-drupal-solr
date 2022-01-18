@@ -2,7 +2,6 @@ name: solr
 
 pre_install_actions:
 - "docker volume rm ${DDEV_PROJECT}_solr 2>/dev/null || true"
-- "rm -rf solr/solr-configupdate.sh"
 
 # files and directories listed here are copied into .ddev
 files:
@@ -10,5 +9,5 @@ files:
 - docker-compose.solr.yaml
 
 post_install_actions:
-- chmod +x solr/solr-configupdate.sh
+- chmod +x solr/docker-entrypoint-initdb.d/solr-configupdate.sh
 
