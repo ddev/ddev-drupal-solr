@@ -2,14 +2,14 @@
 
 ## Installation on Drupal 9
 
-* `ddev service get rfay/solr && ddev restart`
-* You may need to install the relevant Drupal requirements: `ddev composer require drush/drush:* drupal/search_api_solr`
-* Enable the Search API Solr Search Defaults module: `ddev drush en -y search_api_solr_defaults`. (If it can't be enabled due to the "article" content type not existing, you can just create a search_api_solr server manually.)
-* Edit the enabled search_api server named `default_solr_server` at `admin/config/search/search-api/server/default_solr_server/edit`
+1.`ddev service get rfay/solr && ddev restart`
+2. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush:* drupal/search_api_solr`
+3. Enable the Search API Solr Search Defaults module: `ddev drush en -y search_api_solr_defaults`. (If it can't be enabled due to the "article" content type not existing, you can just create a search_api_solr server manually.)
+4. Edit the enabled search_api server named `default_solr_server` at `admin/config/search/search-api/server/default_solr_server/edit`
   * set "Solr host" to `solr`
   * set "Solr core" name to "dev"
   * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`
-* `ddev restart`
+5. `ddev restart`
 
 ## Explanation
 
