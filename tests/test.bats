@@ -21,8 +21,7 @@ setup() {
   pushd ${TESTDIR} >/dev/null
   ddev service get ${DIR}
   ddev restart
-  set | grep DDEV
-  set -x
-  curl -s -L -I http://${DDEV_SITENAME}.${DDEV_TLD}:8983/solr/#/~cores/dev
-  set +x
+  status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
+  [ "${status}" = "enabled" ]
+  ddev drush search-api-solr:reload default_solr_server
 }
