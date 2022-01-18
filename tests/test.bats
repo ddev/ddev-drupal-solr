@@ -13,8 +13,9 @@ setup() {
 }
 
 teardown() {
-    ddev delete -Oy ${DDEV_SITENAME}
-    rm -rf ${TESTDIR}
+  ddev delete -Oy ${DDEV_SITENAME}
+  ddev poweroff
+  rm -rf ${TESTDIR}
 }
 
 @test "basic installation" {
