@@ -15,13 +15,15 @@
 
 This is the classic Drupal solr 8 recipe used for a long time by Drupal users and compatible with search_api_solr. 
 
-It installs a `docker-compose.solr.yaml` and a standard downloaded configuration.
+* It installs a [`.ddev/docker-compose.solr.yaml`](docker-compose.solr.yaml) using the solr:8 docker image
+* A standard Drupal 9 solr configuration is included in [.ddev/solr/conf](.ddev/solr/conf)
+* A [.ddev/docker-entrypoint-initdb.d/solr-configupdate.sh](solr/docker-entrypoint-initdb.d/solr-configupdate.sh) is included and mounted into the solr container so that you can change solr config in .ddev/solr/conf with just a `ddev restart`.
 
 ## Interacting with Apache Solr
 
-* The Solr admin interface will be accessible at: `http://<projectname>.ddev.site:8983/solr/` For example, if the project is named "_myproject_" the hostname will be: `http://myproject.ddev.site:8983/solr/`.
-* To access the Solr container from the web container use: `http://solr:8983/solr/`
+* The Solr admin interface will be accessible at: `http://<projectname>.ddev.site:8983/solr/` For example, if the project is named `myproject` the hostname will be: `http://myproject.ddev.site:8983/solr/`.
+* To access the Solr container from inside the web container use: `http://solr:8983/solr/`
 * A Solr core is automatically created by default with the name "dev"; it can be accessed (from inside the web container) at the URL: `http://solr:8983/solr/dev` or from the host at `http://<projectname>.ddev.site:8983/solr/#/~cores/dev`. You can obviously create other cores to meet your needs.
 
 ## Caveats
-* This recipe won't work with versions of solr before solr:8, and Acquia and Pantheon.io hosting seem to require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/drud/ddev-contrib) for older versions of solr.
+* This recipe won't work with versions of solr before solr:8, and Acquia and Pantheon.io hosting require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/drud/ddev-contrib) for older versions of solr.
