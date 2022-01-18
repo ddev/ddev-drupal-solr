@@ -58,7 +58,7 @@ jobs:
         mv ddev /usr/local/bin/ddev && chmod +x /usr/local/bin/ddev
 
     - name: Download docker images
-      run: ddev debug download-images
+      run: mkdir junk && cd junk && ddev config --auto && ddev debug download-images
     - name: tmate debugging session
       uses: mxschmitt/action-tmate@v3
       with:
