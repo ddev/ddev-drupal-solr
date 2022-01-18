@@ -26,6 +26,7 @@ setup() {
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
   [ "${status}" = "enabled" ]
   ddev list
+  sleep 10 # After a restart, the solr server may not be ready yet.
   ddev drush search-api-solr:reload default_solr_server
   ddev stop
 }
