@@ -12,10 +12,10 @@ setup() {
   ddev import-db --src=${DIR}/tests/testdata/db.sql.gz
 }
 
-#teardown() {
-#    ddev delete -Oy ${DDEV_SITENAME}
-#    rm -rf ${TESTDIR}
-#}
+teardown() {
+    ddev delete -Oy ${DDEV_SITENAME}
+    rm -rf ${TESTDIR}
+}
 
 @test "basic installation" {
   pushd ${TESTDIR} >/dev/null
