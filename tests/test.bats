@@ -5,7 +5,7 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} || true
   cd "${TESTDIR}" || exit 1
-  ddev config --project-name=${PROJNAME} --project-type=drupal9 --docroot=web --create-docroot --mutagen-enabled
+  ddev config --project-name=${PROJNAME} --project-type=drupal9 --docroot=web --create-docroot
   ddev composer create -y -n --no-install drupal/recommended-project
   ddev composer require -n --no-install drush/drush:* drupal/search_api_solr
   ddev composer install -n
@@ -25,4 +25,5 @@ setup() {
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
   [ "${status}" = "enabled" ]
   ddev drush search-api-solr:reload default_solr_server
+  ddev stop
 }
