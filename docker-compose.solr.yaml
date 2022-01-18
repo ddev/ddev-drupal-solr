@@ -70,9 +70,9 @@ services:
       # solr-configupdate.sh copies fresh configuration files into the
       # solr container on each
       # startup, so if you change the config in .ddev/solr/conf
-      # it will be refreshed on `ddev start`. The file must be
-      # executable (`chmod +x .ddev/solr/solr-init.sh
-      - "./solr/solr-configupdate.sh:/docker-entrypoint-initdb.d/solr-configupdate.sh"
+      # it will be refreshed on `ddev start`. It must be executable,
+      # `chmod +x solr
+      - "./solr/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
 
     entrypoint: [ "sh", "-c", "docker-entrypoint.sh solr-precreate dev /solr-conf" ]
 
