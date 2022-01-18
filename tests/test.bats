@@ -20,10 +20,12 @@ setup() {
 
 @test "basic installation" {
   cd ${TESTDIR}
+  ddev list
   ddev service get ${DIR}
   ddev restart
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
   [ "${status}" = "enabled" ]
+  ddev list
   ddev drush search-api-solr:reload default_solr_server
   ddev stop
 }
