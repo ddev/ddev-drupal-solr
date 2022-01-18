@@ -12,21 +12,18 @@ setup() {
   ddev import-db --src=${DIR}/tests/testdata/db.sql.gz
 }
 
-#teardown() {
-#  ddev delete -Oy ${DDEV_SITENAME}
-#  ddev poweroff
-#  rm -rf ${TESTDIR}
-#}
+teardown() {
+  cd ${TESTDIR}
+  ddev delete -Oy ${DDEV_SITENAME}
+  rm -rf ${TESTDIR}
+}
 
 @test "basic installation" {
   cd ${TESTDIR}
-  ddev list
   ddev service get ${DIR}
   ddev restart
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
   [ "${status}" = "enabled" ]
-  ddev list
   sleep 10 # After a restart, the solr server may not be ready yet.
   ddev drush search-api-solr:reload default_solr_server
-  ddev stop
 }
