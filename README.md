@@ -1,5 +1,9 @@
 [![tests](https://github.com/drud/ddev-drupal9-solr/actions/workflows/tests.yml/badge.svg)](https://github.com/drud/ddev-drupal9-solr/actions/workflows/tests.yml)
 
+## What is this?
+
+This repository allows you to quickly install Apache Solr for Drupal 9 using just `ddev service get drud/ddev-drupal9-solr`.
+
 ## Installation on Drupal 9
 
 1.`ddev service get drud/ddev-drupal9-solr && ddev restart`
