@@ -4,7 +4,7 @@ setup() {
   export PROJNAME=testsolr
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} || true
-  cd "${TESTDIR}" || exit 1
+  cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME} --project-type=drupal9 --docroot=web --create-docroot
   ddev composer create -y -n --no-install drupal/recommended-project
   ddev composer require -n --no-install drush/drush:* drupal/search_api_solr
@@ -19,7 +19,7 @@ setup() {
 #}
 
 @test "basic installation" {
-  pushd ${TESTDIR} >/dev/null
+  cd ${TESTDIR}
   ddev service get ${DIR}
   ddev restart
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
