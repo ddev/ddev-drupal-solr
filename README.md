@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This repository allows you to quickly install Apache Solr for Drupal 9 using just `ddev service get drud/ddev-drupal9-solr`.
+This repository allows you to quickly install Apache Solr for Drupal 9 into a [Ddev](https://ddev.readthedocs.io) project using just `ddev service get drud/ddev-drupal9-solr`.
 
 ## Installation on Drupal 9
 
