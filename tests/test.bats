@@ -20,7 +20,7 @@ teardown() {
 
 @test "basic installation" {
   cd ${TESTDIR}
-  ddev service get ${DIR}
+  ddev get ${DIR}
   ddev restart
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
   [ "${status}" = "enabled" ]
