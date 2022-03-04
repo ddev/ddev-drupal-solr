@@ -1,7 +1,5 @@
 # DDev Apache Solr recipe file.
 #
-# SEE IMPORTANT COMPATIBILITY DIFFERENCES BETWEEEN DDEV v1.18.* and v1.19+ below!
-# Before v1.19.* you must comment out the `networks:` line below.
 #
 # To use this in your own project:
 # 1. Copy this file to your project's ".ddev" directory.
@@ -35,9 +33,6 @@ services:
     # README: https://github.com/docker-solr/docker-solr/blob/master/README.md
     # It's almost impossible to work with it if you don't read the docs there
     image: solr:8
-    # CRITICAL COMPATIBILITY ISSUE WITH DDEV V1.18.x and below.
-    # REMOVE THIS `networks:` line for ddev v1.18.x and below
-    networks: [default, ddev_default]
     restart: "no"
     # Solr is served from this port inside the container.
     expose:
