@@ -1,7 +1,6 @@
 name: solr
 
 pre_install_actions:
-- "docker volume rm ddev-${DDEV_PROJECT}_solr 2>/dev/null || true"
 
 # files and directories listed here are copied into .ddev
 project_files:
