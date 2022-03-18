@@ -73,6 +73,8 @@ services:
 
     external_links:
       - "ddev-router:${DDEV_SITENAME}.${DDEV_TLD}"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail -s localhost:8983/solr/"]
 
 volumes:
   # solr is a persistent Docker volume for solr data
