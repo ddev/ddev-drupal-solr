@@ -2,6 +2,7 @@
   Edge NGram String Field
   6.0.0
 -->
+<!-- #ddev-generated -->
 <fieldType name="text_edgenstring" class="solr.TextField" positionIncrementGap="100">
   <analyzer type="index">
     <tokenizer class="solr.KeywordTokenizerFactory"/>

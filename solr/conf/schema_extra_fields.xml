@@ -1,3 +1,4 @@
+<!-- #ddev-generated -->
 <dynamicField name="tcedgestrings_X3b_und_*" type="text_edgenstring" stored="true" indexed="true" multiValued="false" termVectors="true" omitNorms="false" />
 <dynamicField name="tcedgestrings_*" type="text_edgenstring" stored="true" indexed="true" multiValued="false" termVectors="true" omitNorms="false" />
 <dynamicField name="tcedgestringm_X3b_und_*" type="text_edgenstring" stored="true" indexed="true" multiValued="true" termVectors="true" omitNorms="false" />

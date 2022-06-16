@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#ddev-generated
 set -e
 
 # Ensure "dev" core config is always up to date even after the

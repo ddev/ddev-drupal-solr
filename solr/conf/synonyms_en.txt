@@ -1,3 +1,4 @@
+#ddev-generated
 drupal, durpal
 abettor's, abetter's
 abettor, abetter

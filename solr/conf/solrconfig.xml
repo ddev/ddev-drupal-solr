@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- #ddev-generated -->
 
 <!DOCTYPE config [
   <!ENTITY extra SYSTEM "solrconfig_extra.xml">
