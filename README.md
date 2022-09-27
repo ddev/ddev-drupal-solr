@@ -8,11 +8,12 @@ This repository allows you to quickly install Apache Solr for Drupal 9 into a [D
 
 1. `ddev get drud/ddev-drupal9-solr && ddev restart`
 1. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush:* drupal/search_api_solr`
-1. Enable the Search API Solr Search Defaults module: `ddev drush en -y search_api_solr_defaults`. (If it can't be enabled due to the "article" content type not existing, you can just create a search_api_solr server manually.)
-1. Edit the enabled search_api server named `default_solr_server` at `admin/config/search/search-api/server/default_solr_server/edit`
-   * set "Solr host" to `solr`
-   * set "Solr core" name to "dev"
-   * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`
+1. Create a search_api server at `admin/config/search/search-api` -> "Add server"
+1. Choose Solr as backend.
+1. Choose "Standard" as the Solr connector type and configure it:
+   * Set "Solr host" to `solr`.
+   * Set "Solr core" name to "dev".
+   * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
 1. `ddev restart`
 
 ## Explanation
@@ -31,3 +32,4 @@ This is the classic Drupal solr:8 recipe used for a long time by Drupal users an
 
 ## Caveats
 * This recipe won't work with versions of solr before solr:8, and Acquia and Pantheon.io hosting require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/drud/ddev-contrib) for older versions of solr.
+
