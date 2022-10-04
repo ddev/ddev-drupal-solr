@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This repository allows you to quickly install Apache Solr for Drupal 9 into a [Ddev](https://ddev.readthedocs.io) project using just `ddev get drud/ddev-drupal9-solr`.
+This repository allows you to quickly install Apache Solr for Drupal 9 into a [Ddev](https://ddev.readthedocs.io) project using just `ddev get drud/ddev-drupal9-solr`. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
 
 ## Installation on Drupal 9
 
@@ -35,4 +35,5 @@ This is the classic Drupal solr:8 recipe used for a long time by Drupal users an
 
 ## Caveats
 * This recipe won't work with versions of solr before solr:8, and Acquia and Pantheon.io hosting require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/drud/ddev-contrib) for older versions of solr.
+
 
