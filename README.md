@@ -12,6 +12,8 @@ This repository allows you to quickly install Apache Solr for Drupal 9 into a [D
 1. Create a search_api server at `admin/config/search/search-api` -> "Add server"
 1. Choose Solr as backend.
 1. Choose "Standard" as the Solr connector type and configure it:
+    * Set "Server name" to anything you want. Maybe "ddev-solr-server".
+    * Set "Backend" to "Solr"
    * Set "Solr host" to `solr`.
    * Set "Solr core" name to "dev".
    * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
