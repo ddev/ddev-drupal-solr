@@ -8,5 +8,6 @@ project_files:
 - docker-compose.solr.yaml
 
 post_install_actions:
-- chmod +x solr/docker-entrypoint-initdb.d/solr-configupdate.sh
-
+  - |
+    #ddev-description:Make sure solr-configupdate.sh is executable
+    chmod +x solr/docker-entrypoint-initdb.d/solr-configupdate.sh
