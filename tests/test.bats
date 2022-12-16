@@ -7,9 +7,9 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} || true
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME} --project-type=drupal9 --docroot=web --create-docroot
+  ddev config --project-name=${PROJNAME} --project-type=drupal9 --docroot=web --create-docroot --php-version=8.1
   echo "# Setting up Drupal project via composer ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev composer create -y -n --no-install drupal/recommended-project
+  ddev composer create -y -n --no-install drupal/recommended-project:^9
   ddev composer require -n --no-install drush/drush:* drupal/search_api_solr
   ddev composer config --append -- allow-plugins true
   ddev composer install
