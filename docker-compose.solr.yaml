@@ -1,4 +1,4 @@
-# DDev Apache Solr recipe file.
+# DDEV Apache Solr recipe file.
 #ddev-generated
 #
 #
@@ -43,6 +43,9 @@ services:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
     environment:
+      # If you want to use a different name for the core created, change SOLR_CORENAME
+      # and remove the ddev-generated from the top of this file
+      - SOLR_CORENAME=dev
       # This defines the host name the service should be accessible from. This
       # will be sitename.ddev.site.
       - VIRTUAL_HOST=$DDEV_HOSTNAME
@@ -70,7 +73,9 @@ services:
       # `chmod +x solr
       - "./solr/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
 
-    entrypoint: [ "sh", "-c", "docker-entrypoint.sh solr-precreate dev /solr-conf" ]
+    # The odd need to use $$SOLR_CORENAME here is explained in
+    # https://stackoverflow.com/a/48189916/215713
+    entrypoint:  'bash -c "VERBOSE=yes docker-entrypoint.sh solr-precreate $${SOLR_CORENAME:-dev} /solr-conf"'
 
     external_links:
       - "ddev-router:${DDEV_SITENAME}.${DDEV_TLD}"

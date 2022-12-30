@@ -4,7 +4,8 @@ pre_install_actions:
 
 # files and directories listed here are copied into .ddev
 project_files:
-- solr
+- solr/conf
+- solr/docker-entrypoint-initdb.d/solr-configupdate.sh
 - docker-compose.solr.yaml
 
 post_install_actions:
