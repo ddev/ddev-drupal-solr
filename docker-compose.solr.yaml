@@ -1,4 +1,4 @@
-# DDev Apache Solr recipe file.
+# DDEV Apache Solr recipe file.
 #ddev-generated
 #
 #
@@ -22,8 +22,6 @@
 #   change that usage throughout. It can be
 #   accessed at the URL: http://solr:8983/solr/dev (inside web container)
 #   or at http://myproject.ddev.site:8983/solr/dev (on the host)
-
-version: '3.6'
 
 services:
   solr:
@@ -70,7 +68,9 @@ services:
       # `chmod +x solr
       - "./solr/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
 
-    entrypoint: [ "sh", "-c", "docker-entrypoint.sh solr-precreate dev /solr-conf" ]
+    # The odd need to use $$SOLR_CORENAME here is explained in
+    # https://stackoverflow.com/a/48189916/215713
+    entrypoint:  'bash -c "VERBOSE=yes docker-entrypoint.sh solr-precreate $${SOLR_CORENAME:-dev} /solr-conf"'
 
     external_links:
       - "ddev-router:${DDEV_SITENAME}.${DDEV_TLD}"
