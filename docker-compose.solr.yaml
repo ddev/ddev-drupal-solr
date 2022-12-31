@@ -23,8 +23,6 @@
 #   accessed at the URL: http://solr:8983/solr/dev (inside web container)
 #   or at http://myproject.ddev.site:8983/solr/dev (on the host)
 
-version: '3.6'
-
 services:
   solr:
     # Name of container using standard ddev convention
@@ -43,9 +41,6 @@ services:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
     environment:
-      # If you want to use a different name for the core created, change SOLR_CORENAME
-      # and remove the ddev-generated from the top of this file
-      - SOLR_CORENAME=dev
       # This defines the host name the service should be accessible from. This
       # will be sitename.ddev.site.
       - VIRTUAL_HOST=$DDEV_HOSTNAME

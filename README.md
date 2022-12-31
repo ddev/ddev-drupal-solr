@@ -35,7 +35,13 @@ This is the classic Drupal `solr:8` image recipe used for a long time by Drupal 
 
 ## Alternate Core Name
 
-If you want to use a core name other than the default "dev", edit `docker-compose.solr.yaml` to 
+If you want to use a core name other than the default "dev", add a `.ddev/docker-compose.solr-env.yaml` with these contents, using the core name you want to use:
+```
+services:
+  solr:
+    environment:
+    - SOLR_CORENAME=somecorename
+```
 1. Remove the #ddev-generated at the top of the file.
 2. Change SOLR_CORE environment variable in the `environment:` section.
 3. Change your Drupal configuration to use the new core.
