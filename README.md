@@ -24,7 +24,7 @@ This repository allows you to quickly install Apache Solr for Drupal 9+ into a [
 This is the classic Drupal `solr:8` image recipe used for a long time by Drupal users and compatible with `search_api_solr`. 
 
 * It installs a [`.ddev/docker-compose.solr.yaml`](docker-compose.solr.yaml) using the solr:8 docker image.
-* A standard Drupal 9+ solr configuration is included in [.ddev/solr/conf](solr/conf).
+* A standard Drupal 9+ Solr configuration is included in [.ddev/solr/conf](solr/conf).
 * A [.ddev/docker-entrypoint-initdb.d/solr-configupdate.sh](solr/docker-entrypoint-initdb.d/solr-configupdate.sh) is included and mounted into the Solr container so that you can change Solr config in `.ddev/solr/conf` with just a `ddev restart`.
 
 ## Interacting with Apache Solr
