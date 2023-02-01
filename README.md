@@ -10,18 +10,20 @@ This repository allows you to quickly install Apache Solr for Drupal 9+ into a [
 1. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush:* drupal/search_api_solr`
 1. Enable the `search_api_solr` module either using the web interface or `ddev drush en -y search_api_solr`
 1. Create a search_api server at `admin/config/search/search-api` -> "Add server"
-1. Choose Solr as backend.
-1. Choose "Standard" as the Solr connector type and configure it:
-    * Set "Server name" to anything you want. Maybe "ddev-solr-server".
-    * Set "Backend" to "Solr"
-   * Set "Solr host" to `solr`.
-   * Set "Solr core" name to "dev".
-   * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
+1. Create a server with the following settings
+   * Set "Server name" to anything you want. Maybe `ddev-solr-server`.
+   * Set "Backend" to `Solr`
+   * Configure Solr backend
+     * Set "Solr Connector" to `Standard`
+     * Set "Solr host" to `solr`
+     * Set "solr core" to `dev`
+     * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
+
 1. `ddev restart`
 
 ## Explanation
 
-This is the classic Drupal `solr:8` image recipe used for a long time by Drupal users and compatible with `search_api_solr`. 
+This is the classic Drupal `solr:8` image recipe used for a long time by Drupal users and compatible with `search_api_solr`.
 
 * It installs a [`.ddev/docker-compose.solr.yaml`](docker-compose.solr.yaml) using the solr:8 docker image.
 * A standard Drupal 9+ Solr configuration is included in [.ddev/solr/conf](solr/conf).
@@ -36,17 +38,18 @@ This is the classic Drupal `solr:8` image recipe used for a long time by Drupal 
 ## Alternate Core Name
 
 If you want to use a core name other than the default "dev", add a `.ddev/docker-compose.solr-env.yaml` with these contents, using the core name you want to use:
+
 ```
 services:
   solr:
     environment:
     - SOLR_CORENAME=somecorename
 ```
+
 1. Remove the #ddev-generated at the top of the file.
 2. Change SOLR_CORE environment variable in the `environment:` section.
 3. Change your Drupal configuration to use the new core.
 
 ## Caveats
+
 * This recipe won't work with versions of Solr before `solr:8`, and Acquia and Pantheon.io hosting require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/drud/ddev-contrib) for older versions of solr.
-
-
