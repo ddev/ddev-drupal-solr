@@ -1,12 +1,12 @@
-[![tests](https://github.com/drud/ddev-drupal9-solr/actions/workflows/tests.yml/badge.svg)](https://github.com/drud/ddev-drupal9-solr/actions/workflows/tests.yml)
+[![tests](https://github.com/ddev/ddev-drupal9-solr/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-drupal9-solr/actions/workflows/tests.yml)
 
 ## What is this?
 
-This repository allows you to quickly install Apache Solr for Drupal 9+ into a [Ddev](https://ddev.readthedocs.io) project using just `ddev get drud/ddev-drupal9-solr`. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
+This repository allows you to quickly install Apache Solr for Drupal 9+ into a [Ddev](https://ddev.readthedocs.io) project using just `ddev get ddev/ddev-drupal9-solr`. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
 
 ## Installation on Drupal 9+
 
-1. `ddev get drud/ddev-drupal9-solr && ddev restart`
+1. `ddev get ddev/ddev-drupal9-solr && ddev restart`
 1. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush:* drupal/search_api_solr`
 1. Enable the `search_api_solr` module either using the web interface or `ddev drush en -y search_api_solr`
 1. Create a search_api server at `admin/config/search/search-api` -> "Add server"
@@ -52,4 +52,4 @@ services:
 
 ## Caveats
 
-* This recipe won't work with versions of Solr before `solr:8`, and Acquia and Pantheon.io hosting require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/drud/ddev-contrib) for older versions of solr.
+* This recipe won't work with versions of Solr before `solr:8`, and Acquia and Pantheon.io hosting require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of solr.
