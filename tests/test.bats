@@ -25,7 +25,7 @@ teardown() {
 @test "install from directory" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get drud/ddev-drupal9-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  echo "# ddev get ddev/ddev-drupal9-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR} >/dev/null
   ddev restart >/dev/null
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
@@ -36,8 +36,8 @@ teardown() {
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get drud/ddev-drupal9-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get drud/ddev-drupal9-solr >/dev/null
+  echo "# ddev get ddev/ddev-drupal9-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev get ddev/ddev-drupal9-solr >/dev/null
   ddev restart >/dev/null
   status=$(ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status')
   [ "${status}" = "enabled" ]
