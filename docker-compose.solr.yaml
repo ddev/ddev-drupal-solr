@@ -51,7 +51,7 @@ services:
       # solr core *data* is stored on the 'solr' docker volume
       # This mount is optional; without it your search index disappears
       # each time the ddev project is stopped and started.
-      - solr:/var/solr
+      - solr:/opt/solr/server/solr/mycoresç
 
       # This mounts the conf in .ddev/solr into the container where
       # the solr-precreate command in the entrypoint uses it as a one-time
