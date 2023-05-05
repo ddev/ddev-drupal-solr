@@ -21,48 +21,9 @@ This repository allows you to quickly install Apache Solr for Drupal 9+ into a [
 
 6. `ddev restart`
 
-## Installation on Silverstripe 4+
+### Other frameworks
 
-1. `ddev get ddev/ddev-drupal9-solr && ddev restart`
-2. Install the required/relevant Silverstripe requirements: `ddev composer require firesphere/solr-search`
-    * Note that there are currently some tricky dependencies. This is known and to be fixed soon (tm)
-4. Solr is set to use the FileConfigStore. Ensure it's data location is at `.ddev/solr` and the host is set to `solr`:
-```yml
----
-Name: LocalSolrSearch
-After:
-  - 'SolrSearch'
-Only:
-  environment: 'dev'
----
-Firesphere\SolrSearch\Services\SolrCoreService:
-  config:
-    endpoint:
-      localhost:
-        host: solr
-  store:
-    path: './.ddev/solr'
-Firesphere\SolrSearch\Indexes\BaseIndex:
-  dev:
-    Classes:
-      - Page
-    FulltextFields:
-      - Title
-      - Content
-```
-5. Edit `.ddev/docker-compose.solr.yml` and on line 60, change `- ./solr:/solr-conf` to `- ./solr/dev:/solr-conf`
-    * Historically, Silverstripe uses the name of the core as sub-folder for the location of the core, which is why the location in the YML needs updating.
-    * [Refer to the documentation of the Silverstripe Solr module](https://firesphere.github.io/solr-docs/) for how to configure it.
-6. Run the Silverstripe Solr configuration command `ddev exec vendor/bin/sake dev/tasks/SolrConfigureTask` or with the ddev-contrib add-on installed `ddev sake dev/tasks/SolrConfigureTask`
-7. Restart ddev with `ddev restart`
-8. Now your core configuration should be visible in Solr by visiting {yourproject}.ddev.site:8983, and check the schema for `dev`
-9. Now you can add documents, update your index, etc. according to the documentation.
-  * **NOTE** You will need to restart your solr engine, or the Solr container in its entirety, every time you change your core configuration.
-  * **NOTE** Be aware you'll need to either rename or copy your Solr configuration, for production environments and update it as such.
-
-#### Alternate core name in Silverstripe
-
-In Silverstripe, using an alternate/different core name is a matter of changing the mount point in the `.ddev/docker-compose.solr.yml` configuration.
+See [the documentation in the `docs` folder](docs/README.md)
 
 ## Explanation
 
