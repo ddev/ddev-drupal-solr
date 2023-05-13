@@ -23,7 +23,7 @@ This repository allows you to quickly install Apache Solr for Drupal 9+ into a [
 
 ### Other frameworks
 
-See [the documentation in the `docs` folder](docs/README.md)
+See [the documentation in the `doc` folder](doc/README.md)
 
 ## Explanation
 
