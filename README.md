@@ -56,4 +56,4 @@ services:
 
 ## Caveats
 
-* This recipe won't work with versions of Solr before `solr:8`, and Acquia's hosting require versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of solr.
+* This recipe won't work with versions of Solr before `solr:8`, and Acquia's hosting requires versions from 3 to 7. You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of solr.
