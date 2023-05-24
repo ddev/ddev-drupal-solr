@@ -43,7 +43,7 @@ This is the classic Drupal `solr:8` image recipe used for a long time by Drupal 
 
 If you want to use a core name other than the default "dev", add a `.ddev/docker-compose.solr-env.yaml` with these contents, using the core name you want to use:
 
-```
+```yml
 services:
   solr:
     environment:
