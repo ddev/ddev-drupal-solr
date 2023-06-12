@@ -7,9 +7,9 @@ This repository allows you to quickly install Apache Solr for Drupal 9+ into a [
 ## Installation on Drupal 9+
 
 1. `ddev get ddev/ddev-drupal9-solr && ddev restart`
-2. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush:* drupal/search_api_solr`
+2. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush drupal/search_api_solr`
 3. Enable the `search_api_solr` module either using the web interface or `ddev drush en -y search_api_solr`
-4. Create a search_api server at `admin/config/search/search-api` -> "Add server"
+4. Create a Search API server at `admin/config/search/search-api` -> "Add server"
 5. Create a server with the following settings
    * Set "Server name" to anything you want. Maybe `ddev-solr-server`.
    * Set "Backend" to `Solr`
@@ -20,6 +20,14 @@ This repository allows you to quickly install Apache Solr for Drupal 9+ into a [
      * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
 
 6. `ddev restart`
+
+## Outdated Solr config files
+
+If you get a message about Solr having outdated config files, you need to update the included Solr config files.
+
+1. Click "Get config.zip" on the server page
+2. Unzip the files, and put the config files into `.ddev/solr/conf/`
+3. Run `ddev restart`
 
 ### Other frameworks
 
@@ -49,10 +57,8 @@ services:
     environment:
     - SOLR_CORENAME=somecorename
 ```
-
-1. Remove the #ddev-generated at the top of the file.
-2. Change SOLR_CORE environment variable in the `environment:` section.
-3. Change your Drupal configuration to use the new core.
+1. Change SOLR_CORENAME environment variable in the `environment:` section.
+2. Change your Drupal configuration to use the new core.
 
 ## Caveats
 
