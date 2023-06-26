@@ -60,6 +60,8 @@ services:
 1. Change SOLR_CORENAME environment variable in the `environment:` section.
 2. Change your Drupal configuration to use the new core.
 
+You can delete the "dev" core from `http://<projectname>.ddev.site:8983/solr/#/~cores/dev` by clicking "Unload".
+
 ## Caveats
 
 * This recipe won't work with versions of Solr before `solr:8`, and Acquia's hosting [requires Solr 7](https://docs.acquia.com/acquia-search/). You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of Solr.
