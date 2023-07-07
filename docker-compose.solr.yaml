@@ -27,6 +27,7 @@ services:
   solr:
     # Name of container using standard ddev convention
     container_name: ddev-${DDEV_SITENAME}-solr
+    hostname: ${DDEV_SITENAME}-solr
     # The solr docker image is at https://hub.docker.com/_/solr/
     # and code at https://github.com/docker-solr/docker-solr
     # README: https://github.com/docker-solr/docker-solr/blob/master/README.md
@@ -36,6 +37,7 @@ services:
     # Solr is served from this port inside the container.
     expose:
       - 8983
+      - 8984
     # These labels ensure this service is discoverable by ddev.
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
@@ -47,6 +49,7 @@ services:
       # HTTP_EXPOSE exposes http traffic from the container port 8983
       # to the host port 8983 vid ddev-router reverse proxy.
       - HTTP_EXPOSE=8983:8983
+      - HTTPS_EXPOSE=8984:8983
     volumes:
       # solr core *data* is stored on the 'solr' docker volume
       # This mount is optional; without it your search index disappears
