@@ -1,5 +1,13 @@
 [![tests](https://github.com/ddev/ddev-drupal9-solr/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-drupal9-solr/actions/workflows/tests.yml)
 
+## What is the difference between this and ddev-solr
+
+Please consider using [ddev/ddev-solr](https://github.com/ddev/ddev-solr) which runs Solr in the modern "cloud" mode. This offers several advantages. If you are using Drupal, the biggest advantage
+is that you can update the Solr Configset from the UI or with a Drush command everytime you update search_api_solr.
+
+The current addon runs in "classic standalone" mode. It is probably simpler at first to setup, but comes with the added maintainance steps for configsets. Most Solr hosting service providers run "Solr Cloud"
+as a backend.
+
 ## What is this?
 
 This repository allows you to quickly install Apache Solr for Drupal 9+ into a [Ddev](https://ddev.readthedocs.io) project using just `ddev get ddev/ddev-drupal9-solr`. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
