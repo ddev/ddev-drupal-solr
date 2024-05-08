@@ -7,10 +7,15 @@
 
 ## What is the difference between this and ddev-solr
 
-Please consider using [ddev/ddev-solr](https://github.com/ddev/ddev-solr), which runs Solr in the modern "Cloud" mode. This offers several advantages. If you are using Drupal, the biggest advantage
-is that you can update the Solr Configset from the UI or with a Drush command everytime you update `search_api_solr`.
+[ddev/ddev-solr](https://github.com/ddev/ddev-solr) provides the Solr server. This module only adds drupal-specific convenience functions.
 
-The current addon runs in "classic standalone" mode. It is probably simpler at first to setup, but comes with the added maintainance steps for configsets. Most Solr hosting service providers run "Solr Cloud" as a backend.
+## Migratiing from 1.x to 2.x
+
+```bash
+ddev add-on get ddev/ddev-solr
+ddev add-on get ddev/ddev-drupal-solr
+ddev restart
+```
 
 ## Overview
 
