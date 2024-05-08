@@ -12,6 +12,7 @@
 ## Migratiing from 1.x to 2.x
 
 ```bash
+ddev stop
 ddev add-on get ddev/ddev-solr
 ddev add-on get ddev/ddev-drupal-solr
 ddev restart

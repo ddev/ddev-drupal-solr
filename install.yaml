@@ -22,6 +22,8 @@ pre_install_actions:
             sed -i 's/FastLRUCache/CaffeineCache/g; s/LRUCache/CaffeineCache/g; s/LFUCache/CaffeineCache/g; s/FastLRUCache/CaffeineCache/g' "$file"
           fi
         done
+        echo "Removing old solr volume ..."
+        docker volume rm ddev-`ddev status | grep Project: | cut -d ' ' -f 3`_solr
         echo "Removing solr/docker-entrypoint-initdb.d ..."
         rm -rf solr/docker-entrypoint-initdb.d
         echo "... migration finished."
