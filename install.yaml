@@ -19,7 +19,7 @@ pre_install_actions:
           if [ -f "$file" ]; then
             cp "$file" "${file}.bak"
             sed -i '/<queryResponseWriter name="xslt" class="solr.XSLTResponseWriter">/,/<\/queryResponseWriter>/{/<\/queryResponseWriter>/!d;/<\/queryResponseWriter>/d;}' "$file"
-            sed -i 's/LRUCache/CaffeineCache/g; s/FastLRUCache/CaffeineCache/g; s/LFUCache/CaffeineCache/g; s/FastLRUCache/CaffeineCache/g' "$file"
+            sed -i 's/FastLRUCache/CaffeineCache/g; s/LRUCache/CaffeineCache/g; s/LFUCache/CaffeineCache/g; s/FastLRUCache/CaffeineCache/g' "$file"
           fi
         done
         echo "Removing solr/docker-entrypoint-initdb.d ..."
