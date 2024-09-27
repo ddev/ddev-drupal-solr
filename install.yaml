@@ -5,10 +5,6 @@ pre_install_actions:
 # files and directories listed here are copied into .ddev
 project_files:
 - solr/conf
-- solr/docker-entrypoint-initdb.d/solr-configupdate.sh
 - docker-compose.solr.yaml
 
 post_install_actions:
-  - |
-    #ddev-description:Make sure solr-configupdate.sh is executable
-    chmod +x solr/docker-entrypoint-initdb.d/solr-configupdate.sh
