@@ -10,11 +10,11 @@ as a backend.
 
 ## What is this?
 
-This repository allows you to quickly install Apache Solr for Drupal 9+ into a [Ddev](https://ddev.readthedocs.io) project using just `ddev get ddev/ddev-drupal9-solr`. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
+This repository allows you to quickly install Apache Solr for Drupal 9+ into a [Ddev](https://ddev.readthedocs.io) project using just `ddev add-on get ddev/ddev-drupal-solr`. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
 
 ## Installation on Drupal 9+
 
-1. `ddev get ddev/ddev-drupal9-solr && ddev restart`
+1. `ddev add-on get ddev/ddev-drupal-solr && ddev restart`
 2. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush drupal/search_api_solr`
 3. Enable the `search_api_solr` module either using the web interface or `ddev drush en -y search_api_solr`
 4. Create a Search API server at `admin/config/search/search-api` -> "Add server"
