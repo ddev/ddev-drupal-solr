@@ -70,6 +70,49 @@ services:
 
 You can delete the "dev" core from `http://<projectname>.ddev.site:8983/solr/#/~cores/dev` by clicking "Unload".
 
+## Multiple Solr Cores
+
+If you would like to use more than one Solr core, add a  `.ddev/docker-compose.solr_extra.yaml` to override some of the default configuration.
+
+1. Define a mount point for each core you require. Add new mount points for each core, for example:
+```yml
+services:
+  solr:
+    volumes:
+    - ./solr:/solr-conf
+    - ./core2:/core2-conf
+    - ./core3:/core3-conf
+```
+
+2. Create the directories for your new cores' config, and copy the desired solr config in to it, eg:
+   
+   `cp -R .ddev/solr .ddev/core2`
+   
+   `cp -R .ddev/solr .ddev/core3`
+   
+   `cp -R path/to/core2-config/* .ddev/core2/conf/`
+   
+   `cp -R path/to/core3-config/* .ddev/core3/conf/`
+   
+4. Set the 'entrypoint' value to use `precreate-core` instead of `solr-precreate` and add the additional cores, along with a command to start solr afterwards:
+```yml
+services:
+  solr:
+    entrypoint: 'bash -c "VERBOSE=yes docker-entrypoint.sh precreate-core solrconf /solr-conf ; precreate-core core2 /core2-conf ; precreate-core core3 /core3-conf  ; exec solr -f "'
+```
+
+5. Your finished [`.ddev/docker-compose.solr_extra.yaml`](docker-compose.solr_extra.yaml) file should now look something like this:
+```yml
+  services:
+  solr:
+    volumes:
+    - ./solr:/solr-conf
+    - ./core2:/core2-conf
+    - ./core3:/core3-conf
+    entrypoint: 'bash -c "VERBOSE=yes docker-entrypoint.sh precreate-core solrconf /solr-conf ; precreate-core core2 /core2-conf ; precreate-core core3 /core3-conf  ; exec solr -f "'
+```
+5. Finally, `ddev restart` to pick up the changes and create the new cores.
+   
 ## Caveats
 
 * This recipe won't work with versions of Solr before `solr:8`, and Acquia's hosting [requires Solr 7](https://docs.acquia.com/acquia-search/). You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of Solr.
