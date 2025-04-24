@@ -1,13 +1,33 @@
-name: solr
+name: drupal-solr
 
-project_files:
-  - solr/conf
-  - solr/docker-entrypoint-initdb.d/solr-configupdate.sh
-  - docker-compose.solr.yaml
+dependencies:
+  - ddev/ddev-solr
 
-post_install_actions:
+# migrate from ddev-drupal-solr 1.x to ddev-solr
+pre_install_actions:
   - |
-    #ddev-description:Make sure solr-configupdate.sh is executable
-    chmod +x solr/docker-entrypoint-initdb.d/solr-configupdate.sh
+    if [ -d .ddev/solr/conf ]; then
+      echo "Migrating core 'dev' to ddev-solr ..."
+      if [ -d .ddev/solr/configsets/dev ]; then
+        echo "Migration error: .ddev/solr/configsets/dev already exists."
+      else
+        echo "Moving ddev/solr/conf to .ddev/solr/configsets/dev/conf ..."
+        mkdir .ddev/solr/configsets/dev
+        mv .ddev/solr/conf .ddev/solr/configsets/dev/
+        echo "Patching .ddev/solr/configsets/dev/conf/solrconfig* ..."
+        for file in .ddev/solr/configsets/dev/conf/solrconfig*; do
+          if [ -f "$file" ]; then
+            cp "$file" "${file}.bak"
+            sed -i '/<queryResponseWriter name="xslt" class="solr.XSLTResponseWriter">/,/<\/queryResponseWriter>/{/<\/queryResponseWriter>/!d;/<\/queryResponseWriter>/d;}' "$file"
+            sed -i 's/FastLRUCache/CaffeineCache/g; s/LRUCache/CaffeineCache/g; s/LFUCache/CaffeineCache/g; s/FastLRUCache/CaffeineCache/g' "$file"
+          fi
+        done
+        echo "Removing old solr volume ..."
+        docker volume rm ddev-`ddev status | grep Project: | cut -d ' ' -f 3`_solr
+        echo "Removing solr/docker-entrypoint-initdb.d ..."
+        rm -rf solr/docker-entrypoint-initdb.d
+        echo "... migration finished."
+      fi
+    fi
 
 ddev_version_constraint: '>= v1.24.3'
