@@ -20,9 +20,18 @@ This add-on integrates Solr for Drupal 9+ into your [DDEV](https://ddev.com/) pr
 
 ## Installation on Drupal 9+
 
-1. `ddev add-on get ddev/ddev-drupal-solr && ddev restart`
-2. You may need to install the relevant Drupal requirements: `ddev composer require drush/drush drupal/search_api_solr`
-3. Enable the `search_api_solr` module either using the web interface or `ddev drush en -y search_api_solr`
+1. ```bash
+   ddev add-on get ddev/ddev-drupal-solr
+   ddev restart
+   ```
+2. You may need to install the relevant Drupal requirements:
+   ```bash
+   ddev composer require drush/drush drupal/search_api_solr
+   ```
+3. Enable the `search_api_solr` module either using the web interface or
+   ```bash
+   ddev drush en -y search_api_solr
+   ```
 4. Create a Search API server at `admin/config/search/search-api` -> "Add server"
 5. Create a server with the following settings
    * Set "Server name" to anything you want. Maybe `ddev-solr-server`.
@@ -57,9 +66,9 @@ See [the documentation in the `doc` folder](doc/README.md)
 
 ## Explanation
 
-This is the classic Drupal `solr:8` image recipe used for a long time by Drupal users and compatible with `search_api_solr`.
+This originates from the classic Drupal `solr:8` image recipe used for a long time by Drupal users and compatible with `search_api_solr`.
 
-* It installs a [`.ddev/docker-compose.solr.yaml`](docker-compose.solr.yaml) using the solr:8 docker image.
+* It installs a [`.ddev/docker-compose.solr.yaml`](docker-compose.solr.yaml) using the `solr:8` docker image.
 * A standard Drupal 9+ Solr configuration is included in [.ddev/solr/conf](solr/conf).
 * A [.ddev/docker-entrypoint-initdb.d/solr-configupdate.sh](solr/docker-entrypoint-initdb.d/solr-configupdate.sh) is included and mounted into the Solr container so that you can change Solr config in `.ddev/solr/conf` with just a `ddev restart`.
 
