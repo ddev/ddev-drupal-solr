@@ -1,6 +1,6 @@
 # Installation and usage on Silverstripe 4+
 
-1. `ddev get ddev/ddev-drupal9-solr && ddev restart`
+1. `ddev add-on get ddev/ddev-drupal9-solr && ddev restart`
 2. Install the required/relevant Silverstripe requirements: `ddev composer require firesphere/solr-search`
     * Note that there are currently some known issues around Guzzle dependencies in the module, that are currently in the process of being resolved.
 3. Solr is set to use the FileConfigStore. Ensure its data location is at `.ddev/solr` and the host is set to `solr`:
