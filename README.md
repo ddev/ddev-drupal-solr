@@ -41,45 +41,45 @@ This add-on integrates Solr for Drupal 9+ into your [DDEV](https://ddev.com/) pr
      * Set "Solr host" to `solr`
      * Set "solr core" to `dev`
      * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
-6. `ddev restart`
+6. Restart DDEV: `ddev restart`
 
 ## Installation on Drupal 7
 
-### Ddev / Solr configuration
+### DDEV / Solr configuration
 
 1. Install this add-on: `ddev add-on get ddev/ddev-drupal-solr`
 2. Set the version of Solr version 7: Edit the `.ddev/docker-compose.solr.yaml` file. Replace `image: solr:8` with `image: solr:7` on line 34.
 3. Add the schema needed for version 7: Defaults can be found in the Search API Solr in the `search_api_solr/solr-conf/7.x` directory . Copy these files into `.ddev/solr/conf`.
-4. Restart Ddev: `ddev restart`.
+4. Restart DDEV: `ddev restart`.
 5. Confirm Solr is working by visiting `http://<projectname>.ddev.site:8983/solr/`.
 6. If the Ddev drush version is too new for Drupal 7, you may need to symlink `drush` to the `drush8` provided with Ddev. You can do this by adding a `post-start` hook inside your `.ddev/config.yaml` file as follows
-  ```
-  hooks:
-    post-start:
-    - exec: ln -s /usr/local/bin/drush8 /usr/local/bin/drush
-  ```
-7. Restart Ddev: `ddev restart`.
+    ```yaml
+    hooks:
+      post-start:
+        - exec: ln -s /usr/local/bin/drush8 /usr/local/bin/drush
+    ```
+7. Restart DDEV: `ddev restart`.
 
 ### Drupal configuration
 
 1. You may need to install the relevant Drupal modules: `ddev drush dl search_api_solr`.
 2. Enable the `search_api_solr` module either using the web interface or `ddev drush en -y search_api_solr`
-4. Create a Search API server at `admin/config/search/search-api` -> "Add server"
-5. Configure the server with the following settings:
+3. Create a Search API server at `admin/config/search/search-api` -> "Add server"
+4. Configure the server with the following settings:
    * Set "Server name" to anything you want. Maybe `ddev-solr-server`.
    * Set "Protocol" to `http`
    * Set "Solr host" to `solr`
    * Set "Solr port" to `8983`
    * Set "path" to `/solr/dev`.
    The "Solr server URI" should be `http://solr:8983/solr/dev` when done.
-6. Create a Search API index at `admin/config/search/search-api` -> "Add index"
-7. Configure the index as needed, but this is common:
+5. Create a Search API index at `admin/config/search/search-api` -> "Add index"
+6. Configure the index as needed, but this is common:
    * Set "Server name" to anything you want. Maybe `ddev-solr-index-content`.
    * Set "item type" to `content`
    * Set the server to `ddev-solr-server` (or whaver the name is)
    * Index the site.
-8. Build a new view of indexed content `ddev-solr-index-content` (or whatever the name is)
-7. Configure the view as needed, but this is common:
+7. Build a new view of indexed content `ddev-solr-index-content` (or whatever the name is)
+8. Configure the view as needed, but this is common:
    * Set "View name" to anything you want. Maybe `Solr Search`.
    * Set "Show" to `ddev-solr-index-content` (or whatever the name is)
    * Tick the box for "Create a page"
@@ -105,13 +105,13 @@ If you get a message about Solr having outdated config files, you need to update
 
 1. Click "Get config.zip" on the server page
 2. Unzip the files, and put the config files into `.ddev/solr/conf/`
-3. Restart Ddev: `ddev restart`
+3. Restart DDEV: `ddev restart`
 
 ### Drupal 7
 
 1. Locate the example files in the `search_api_solr/solr-conf/7.x` directory .
 2. Copy these files into `.ddev/solr/conf`.
-4. Restart Ddev: `ddev restart`.
+3. Restart DDEV: `ddev restart`.
 
 ### Other frameworks
 
@@ -204,7 +204,7 @@ If you would like to use more than one Solr core, add a  `.ddev/docker-compose.s
 
 ## Caveats
 
-* This recipe won't work with versions of Solr before `solr:8`, and Acquia's hosting [requires Solr 7](https://docs.acquia.com/acquia-cloud-platform/docs/features/acquia-search). You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of Solr.
+* This recipe is designed for versions of Solr `solr:8` and beyond. Acquia's hosting [requires Solr 7](https://docs.acquia.com/acquia-cloud-platform/docs/features/acquia-search). You'll want to follow the Drupal 7 instructions above, or see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of Solr.
 
 ## Credits
 
