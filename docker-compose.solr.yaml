@@ -42,7 +42,7 @@ services:
         RUN sed -i '/X-Forwarded-/,/-->/ {/<!--/d; /-->/d}' /opt/solr/server/etc/jetty.xml
         USER solr
       args:
-        SOLR_BASE_IMAGE: ${SOLR_BASE_IMAGE:-solr:8}
+        SOLR_BASE_IMAGE: ${SOLR_BASE_IMAGE:-solr:9}
     restart: "no"
     # Solr is served from this port inside the container.
     expose:
