@@ -1,16 +1,22 @@
-[![tests](https://github.com/ddev/ddev-drupal-solr/actions/workflows/tests.yml/badge.svg)](https://github.com/ddev/ddev-drupal-solr/actions/workflows/tests.yml)
+[![add-on registry](https://img.shields.io/badge/DDEV-Add--on_Registry-blue)](https://addons.ddev.com)
+[![tests](https://github.com/ddev/ddev-drupal-solr/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ddev/ddev-drupal-solr/actions/workflows/tests.yml?query=branch%3Amain)
+[![last commit](https://img.shields.io/github/last-commit/ddev/ddev-drupal-solr)](https://github.com/ddev/ddev-drupal-solr/commits)
+[![release](https://img.shields.io/github/v/release/ddev/ddev-drupal-solr)](https://github.com/ddev/ddev-drupal-solr/releases/latest)
+
+# DDEV Drupal Solr
 
 ## What is the difference between this and ddev-solr
 
-Please consider using [ddev/ddev-solr](https://github.com/ddev/ddev-solr), which runs Solr in the modern "cloud" mode. This offers several advantages. If you are using Drupal, the biggest advantage
-is that you can update the Solr Configset from the UI or with a Drush command everytime you update search_api_solr.
+Please consider using [ddev/ddev-solr](https://github.com/ddev/ddev-solr), which runs Solr in the modern "Cloud" mode. This offers several advantages. If you are using Drupal, the biggest advantage
+is that you can update the Solr Configset from the UI or with a Drush command everytime you update `search_api_solr`.
 
-The current addon runs in "classic standalone" mode. It is probably simpler at first to setup, but comes with the added maintainance steps for configsets. Most Solr hosting service providers run "Solr Cloud"
-as a backend.
+The current addon runs in "classic standalone" mode. It is probably simpler at first to setup, but comes with the added maintainance steps for configsets. Most Solr hosting service providers run "Solr Cloud" as a backend.
 
-## What is this?
+## Overview
 
-This repository allows you to quickly install Apache Solr for Drupal 9+ into a [Ddev](https://ddev.readthedocs.io) project using just `ddev add-on get ddev/ddev-drupal-solr`. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
+[Apache Solr](https://solr.apache.org/) is the blazing-fast, open source, multi-modal search platform built on the full-text, vector, and geospatial search capabilities of Apache Lucene™.
+
+This add-on integrates Solr for Drupal 9+ into your [DDEV](https://ddev.com/) project. It follows the [Setting up Solr (single core) - the classic way](https://git.drupalcode.org/project/search_api_solr/-/blob/4.x/README.md#setting-up-solr-single-core-the-classic-way) recipe.
 
 ## Installation on Drupal 9+
 
@@ -26,7 +32,6 @@ This repository allows you to quickly install Apache Solr for Drupal 9+ into a [
      * Set "Solr host" to `solr`
      * Set "solr core" to `dev`
      * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
-
 6. `ddev restart`
 
 ## Outdated Solr config files
@@ -59,13 +64,14 @@ This is the classic Drupal `solr:8` image recipe used for a long time by Drupal 
 
 If you want to use a core name other than the default "dev", add a `.ddev/docker-compose.solr-env.yaml` with these contents, using the core name you want to use:
 
-```yml
+```yaml
 services:
   solr:
     environment:
-    - SOLR_CORENAME=somecorename
+      - SOLR_CORENAME=somecorename
 ```
-1. Change SOLR_CORENAME environment variable in the `environment:` section.
+
+1. Change `SOLR_CORENAME` environment variable in the `environment:` section.
 2. Change your Drupal configuration to use the new core.
 
 You can delete the "dev" core from `http://<projectname>.ddev.site:8983/solr/#/~cores/dev` by clicking "Unload".
@@ -75,44 +81,53 @@ You can delete the "dev" core from `http://<projectname>.ddev.site:8983/solr/#/~
 If you would like to use more than one Solr core, add a  `.ddev/docker-compose.solr_extra.yaml` to override some of the default configuration.
 
 1. Define a mount point for each core you require. Add new mount points for each core, for example:
-```yml
-services:
-  solr:
-    volumes:
-    - ./solr:/solr-conf
-    - ./core2:/core2-conf
-    - ./core3:/core3-conf
-```
+
+    ```yaml
+    services:
+      solr:
+        volumes:
+          - ./solr:/solr-conf
+          - ./core2:/core2-conf
+          - ./core3:/core3-conf
+    ```
 
 2. Create the directories for your new cores' config, and copy the desired solr config in to it, eg:
-   
-   `cp -R .ddev/solr .ddev/core2`
-   
-   `cp -R .ddev/solr .ddev/core3`
-   
-   `cp -R path/to/core2-config/* .ddev/core2/conf/`
-   
-   `cp -R path/to/core3-config/* .ddev/core3/conf/`
-   
-4. Set the 'entrypoint' value to use `precreate-core` instead of `solr-precreate` and add the additional cores, along with a command to start solr afterwards:
-```yml
-services:
-  solr:
-    entrypoint: 'bash -c "VERBOSE=yes docker-entrypoint.sh precreate-core solrconf /solr-conf ; precreate-core core2 /core2-conf ; precreate-core core3 /core3-conf  ; exec solr -f "'
-```
 
-5. Your finished [`.ddev/docker-compose.solr_extra.yaml`](docker-compose.solr_extra.yaml) file should now look something like this:
-```yml
-  services:
-  solr:
-    volumes:
-    - ./solr:/solr-conf
-    - ./core2:/core2-conf
-    - ./core3:/core3-conf
-    entrypoint: 'bash -c "VERBOSE=yes docker-entrypoint.sh precreate-core solrconf /solr-conf ; precreate-core core2 /core2-conf ; precreate-core core3 /core3-conf  ; exec solr -f "'
-```
+    ```bash
+    cp -R .ddev/solr .ddev/core2
+    cp -R .ddev/solr .ddev/core3
+    cp -R path/to/core2-config/* .ddev/core2/conf/
+    cp -R path/to/core3-config/* .ddev/core3/conf/
+    ```
+
+3. Set the `entrypoint` value to use `precreate-core` instead of `solr-precreate` and add the additional cores, along with a command to start solr afterwards:
+
+    ```yaml
+    services:
+      solr:
+        entrypoint: 'bash -c "VERBOSE=yes docker-entrypoint.sh precreate-core solrconf /solr-conf ; precreate-core core2 /core2-conf ; precreate-core core3 /core3-conf  ; exec solr -f "'
+    ```
+
+4. Your finished `.ddev/docker-compose.solr_extra.yaml` file should now look something like this:
+
+    ```yaml
+    services:
+      solr:
+        volumes:
+          - ./solr:/solr-conf
+          - ./core2:/core2-conf
+          - ./core3:/core3-conf
+        entrypoint: 'bash -c "VERBOSE=yes docker-entrypoint.sh precreate-core solrconf /solr-conf ; precreate-core core2 /core2-conf ; precreate-core core3 /core3-conf  ; exec solr -f "'
+    ```
+
 5. Finally, `ddev restart` to pick up the changes and create the new cores.
-   
+
 ## Caveats
 
-* This recipe won't work with versions of Solr before `solr:8`, and Acquia's hosting [requires Solr 7](https://docs.acquia.com/acquia-search/). You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of Solr.
+* This recipe won't work with versions of Solr before `solr:8`, and Acquia's hosting [requires Solr 7](https://docs.acquia.com/acquia-cloud-platform/docs/features/acquia-search). You'll want to see the [contributed recipes](https://github.com/ddev/ddev-contrib) for older versions of Solr.
+
+## Credits
+
+**Contributed by [@rfay](https://github.com/rfay)**
+
+**Maintained by [@mkalkbrenner](https://github.com/mkalkbrenner), [@bserem](https://github.com/bserem), and the [DDEV team](https://ddev.com/support-ddev/)**
