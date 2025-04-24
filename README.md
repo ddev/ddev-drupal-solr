@@ -48,7 +48,7 @@ This add-on integrates Solr for Drupal 9+ into your [DDEV](https://ddev.com/) pr
 ### Ddev / Solr configuration
 
 1. Install this add-on: `ddev add-on get ddev/ddev-drupal-solr`
-2. Set the version of Solr verison 7: Edit the `.ddev/docker-compose.solr.yaml` file. Replace `image: solr:8` with `image: solr:7` on line 34.
+2. Set the version of Solr version 7: Edit the `.ddev/docker-compose.solr.yaml` file. Replace `image: solr:8` with `image: solr:7` on line 34.
 3. Add the schema needed for version 7: Defaults can be found in the Search API Solr in the `search_api_solr/solr-conf/7.x` directory . Copy these files into `.ddev/solr/conf`.
 4. Restart Ddev: `ddev restart`.
 5. Confirm Solr is working by visiting `http://<projectname>.ddev.site:8983/solr/`.
