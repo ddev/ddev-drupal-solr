@@ -34,7 +34,7 @@ This add-on integrates Solr for Drupal 9+ into your [DDEV](https://ddev.com/) pr
      * Under "Advanced server configuration" set the "solr.install.dir" to `/opt/solr`.
 6. `ddev restart`
 
-## Outdated Solr config files
+### Outdated Solr config files
 
 If you get a message about Solr having outdated config files, you need to update the included Solr config files.
 
@@ -46,6 +46,15 @@ If you get a message about Solr having outdated config files, you need to update
 
 See [the documentation in the `doc` folder](doc/README.md)
 
+## Usage
+
+| Command | Description |
+| ------- | ----------- |
+| `ddev launch :8943` | Open Solr Admin (HTTPS) in your browser (`https://<project>.ddev.site:8943`) |
+| `ddev launch :8983` | Open Solr Admin (HTTP) in your browser (`http://<project>.ddev.site:8983`) |
+| `ddev describe` | View service status and used ports for Solr |
+| `ddev logs -s solr` | Check Solr logs |
+
 ## Explanation
 
 This is the classic Drupal `solr:8` image recipe used for a long time by Drupal users and compatible with `search_api_solr`.
@@ -56,9 +65,9 @@ This is the classic Drupal `solr:8` image recipe used for a long time by Drupal 
 
 ## Interacting with Apache Solr
 
-* The Solr admin interface will be accessible at: `http://<projectname>.ddev.site:8983/solr/` For example, if the project is named `myproject` the hostname will be: `http://myproject.ddev.site:8983/solr/`.
+* The Solr Admin interface will be accessible at: `https://<projectname>.ddev.site:8943/solr/` and `http://<projectname>.ddev.site:8983/solr/`. For example, if the project is named `myproject` the hostname will be: `https://myproject.ddev.site:8943/solr/`.
 * To access the Solr container from inside the web container use: `http://solr:8983/solr/`
-* A Solr core is automatically created by default with the name "dev"; it can be accessed (from inside the web container) at the URL: `http://solr:8983/solr/dev` or from the host at `http://<projectname>.ddev.site:8983/solr/#/~cores/dev`. You can obviously create other cores to meet your needs.
+* A Solr core is automatically created by default with the name "dev"; it can be accessed (from inside the web container) at the URL: `http://solr:8983/solr/dev` or from the host at `https://<projectname>.ddev.site:8943/solr/#/~cores/dev`. You can obviously create other cores to meet your needs.
 
 ## Alternate Core Name
 
@@ -74,7 +83,7 @@ services:
 1. Change `SOLR_CORENAME` environment variable in the `environment:` section.
 2. Change your Drupal configuration to use the new core.
 
-You can delete the "dev" core from `http://<projectname>.ddev.site:8983/solr/#/~cores/dev` by clicking "Unload".
+You can delete the "dev" core from `https://<projectname>.ddev.site:8943/solr/#/~cores/dev` by clicking "Unload".
 
 ## Multiple Solr Cores
 
