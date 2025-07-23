@@ -31,6 +31,7 @@ services:
     # and code at https://github.com/docker-solr/docker-solr
     # README: https://github.com/docker-solr/docker-solr/blob/master/README.md
     # It's almost impossible to work with it if you don't read the docs there
+    image: ${SOLR_BASE_IMAGE:-solr:8}-${DDEV_SITENAME}-built
     build:
       dockerfile_inline: |
         ARG SOLR_BASE_IMAGE="scratch"
