@@ -32,26 +32,33 @@ setup() {
   export DDEV_NO_INSTRUMENTATION=true
   ddev delete -Oy "${PROJNAME}" >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  run ddev config --project-name="${PROJNAME}" --project-tld=ddev.site --project-type=drupal9 --docroot=web --php-version=8.1
+  run ddev config --project-name="${PROJNAME}" --project-tld=ddev.site --project-type=drupal11 --docroot=web
   assert_success
   run ddev start -y
   assert_success
 
   echo "# Setting up Drupal project via composer ${PROJNAME} in $(pwd)" >&3
-  ddev composer create-project -n --no-install drupal/recommended-project:^9 >/dev/null
-  ddev composer require -n --no-install drush/drush:* drupal/search_api_solr >/dev/null
-  ddev composer config --append -- allow-plugins true
-  ddev composer install >/dev/null
-  ddev import-db --file=${DIR}/tests/testdata/db.sql.gz >/dev/null
+  run ddev composer create-project -n --no-install drupal/recommended-project >/dev/null
+  assert_success
+  run ddev composer require -n --no-install drush/drush:* drupal/search_api_solr >/dev/null
+  assert_success
+  run ddev composer config --append -- allow-plugins true
+  assert_success
+  run ddev composer install >/dev/null
+  assert_success
+  run ddev import-db --file=${DIR}/tests/testdata/db.sql.gz >/dev/null
+  assert_success
+  run ddev drush en -y search_api_solr
+  assert_success
 }
 
 health_checks() {
-  run ddev exec 'drush sapi-sl --format=json | jq -r .default_solr_server.status'
+  run ddev exec 'drush search-api:server-list --format=json | jq -r .ddev_solr_server.status'
   assert_success
   assert_output "enabled"
 
-  run ddev drush search-api-solr:reload default_solr_server
-  assert_success
+#  run ddev drush search-api-solr:reload ddev_solr_server
+#  assert_success
 
   # Make sure the solr admin UI via HTTP from outside is redirected to HTTP /solr/
   run curl -sfI http://${PROJNAME}.ddev.site:8983

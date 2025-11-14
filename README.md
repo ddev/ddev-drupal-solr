@@ -7,10 +7,10 @@
 
 ## What is the difference between this and ddev-solr
 
-Please consider using [ddev/ddev-solr](https://github.com/ddev/ddev-solr), which runs Solr in the modern "Cloud" mode. This offers several advantages. If you are using Drupal, the biggest advantage
+Please consider using [ddev/ddev-solr](https://github.com/ddev/ddev-solr), which runs Solr in the modern "Cloud" mode. This is the recommended and maintained Apache Solr integration. `ddev-solr` offers several advantages. If you are using Drupal, the biggest advantage
 is that you can update the Solr Configset from the UI or with a Drush command everytime you update `search_api_solr`.
 
-The current addon runs in "classic standalone" mode. It is probably simpler at first to setup, but comes with the added maintainance steps for configsets. Most Solr hosting service providers run "Solr Cloud" as a backend.
+The current addon runs in "classic standalone" mode. It is probably simpler at first to setup, but comes with the added maintenance steps for configsets. Most Solr hosting service providers run "Solr Cloud" as a backend.
 
 ## Overview
 
