@@ -57,7 +57,7 @@ services:
       # will be sitename.ddev.site.
       - VIRTUAL_HOST=$DDEV_HOSTNAME
       # HTTP_EXPOSE exposes http traffic from the container port 8983
-      # to the host port 8983 vid ddev-router reverse proxy.
+      # to the host port 8983 via ddev-router reverse proxy.
       - HTTP_EXPOSE=8983:8983
       - HTTPS_EXPOSE=8943:8983
     volumes:
