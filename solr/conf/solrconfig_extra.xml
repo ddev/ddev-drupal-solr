@@ -14,7 +14,7 @@
       <str name="thresholdTokenFrequency">.01</str>
       <str name="onlyMorePopular">true</str>
     </lst>
-  
+
     <lst name="spellchecker">
       <str name="name">und</str>
       <str name="field">spellcheck_und</str>
@@ -41,7 +41,7 @@
       <str name="buildOnCommit">true</str>
       <str name="buildOnStartup">false</str>
     </lst>
-  
+
     <lst name="suggester">
       <str name="name">und</str>
       <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
